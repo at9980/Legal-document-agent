@@ -1,2 +1,66 @@
-# Legal-document-agent
-Legal document agent
+법률 분야 특화형 자기교정 RAG 에이전트 시스템
+
+law-rag-system/
+├── agents/
+│   ├── personal_agent.py  # 개인정보보호법 에이전트
+│   └── labor_agent.py     # 노동법 에이전트 (예시)
+├── core/
+│   ├── models.py          # Pydantic 데이터 모델
+│   ├── prompts.py         # LLM 프롬프트 템플릿
+│   ├── processor.py       # 정보 처리 파이프라인
+│   └── retriever.py       # 문서 검색 모듈
+├── workflows/             # LangGraph 워크플로우
+├── main.py                # 실행 진입점
+└── config.py              # 전역 설정
+
+
+
+
+## 📌 프로젝트 개요
+- **목적**: 특정 법률 분야(개인정보보호법 등)에 특화된 지능형 QA 시스템 구현
+- **핵심 기능**:
+  - 법률 도메인 특화형 RAG 에이전트
+  - 자가 진단 기반 질문 재작성(Corrective RAG)
+  - 다단계 피드백 메커니즘
+  - 인간-에이전트 협업 인터페이스
+
+## 🚀 주요 기능
+- **법률 특화 에이전트**
+  - 개인정보보호법 전용 RAG 파이프라인
+  - 법률 조문 구조 이해를 통한 컨텍스트 추출
+- **자기교정 메커니즘**
+  - 검색 결과 기반 질문 재작성(Query Rewriting)
+  - 문서 관련성 평가 및 자가 피드백
+- **지능형 라우팅**
+  - 멀티 에이전트 협업 구조
+  - 질문 유형 분류를 통한 전문가 에이전트 연결
+- **안전장치 시스템**
+  - 답변 신뢰도 임계값 설정(0.7 기준)
+  - 저신뢰도 답변 시 인간 검토 요청
+
+## ⚙️ 설치 방법
+```bash
+# 필수 요구사항
+- Python 3.10+
+- Poetry (권장)
+
+# 의존성 설치
+poetry install
+
+# 필요한 라이브러리 설치
+pip install langchain-core langchain-community pydantic
+
+# 실행 방법
+python main.py
+
+# 주의 사항
+1. .env 파일에 OpenAI API 키 등 필요한 인증 정보 설정
+2.  실제 검색 도구 구현 필요 (현재 예시는 가상 검색 도구)
+3.  모듈 간 상대 경로 임포트 문제 발생시 PYTHONPATH 설정
+
+
+# 에러 발생시 체크리스트
+1.  모든 의존성 라이브러리 설치 확인
+2.  파일 구조와 모듈 임포트 경로 확인
+3.  실제 서비스 API 키 등 인증 정보 설정
+4.  LLM 및 검색 도구 구현체 교체 여부 확인
